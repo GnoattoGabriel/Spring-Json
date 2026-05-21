@@ -1,25 +1,27 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.PedidoModel;
+import com.example.demo.models.ClienteModel;
 import com.example.demo.models.ProdutoModel;
+import com.example.demo.services.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(path = "/pedido")
+@RequestMapping(path = "/pedidos")
 public class PedidoController {
+    @Autowired
+    private ClienteService clienteService;
 
-    @PostMapping
-    public String receberPedido(@RequestBody PedidoModel pedido) {
+    public List<ClienteModel> listarCliente(){
+        return clienteService.listarCliente();
+    }
 
-        System.out.println(pedido.getCliente().getNome());
-
-        for(ProdutoModel p : pedido.getProdutos()) {
-            System.out.println(p.getNome());
-        }
-
-        return "OK";
+    public ClienteModel save(@RequestBody ClienteModel cliente){
+        return clienteService.save(cliente);
     }
 }

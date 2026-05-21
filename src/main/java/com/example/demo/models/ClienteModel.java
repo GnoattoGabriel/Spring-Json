@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_cliente")
+@Table(name = "tb_clientes")
 @Data
 public class ClienteModel {
 
@@ -15,11 +15,9 @@ public class ClienteModel {
     private Long id;
 
     private String nome;
-    private String email;
-    private String telefone;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id")
-    private List<PedidoModel> pedidos;
+    private List<ProdutoModel> produtoList;
 
 }
